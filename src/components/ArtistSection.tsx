@@ -16,6 +16,7 @@ interface ArtistProps {
   votesUsed: number;
   onUpvote: (params: number) => any;
   onDownvote: (params: number) => any;
+  votes: (params: number) => any;
 }
 
 const ArtistSection = ({
@@ -23,6 +24,7 @@ const ArtistSection = ({
   votesUsed,
   onUpvote,
   onDownvote,
+  votes,
 }: ArtistProps) => {
   const [show, setShow] = useState(false);
 
@@ -75,6 +77,7 @@ const ArtistSection = ({
   const handleUpvote = () => {
     setShow(!show);
     onUpvote(data.id);
+    votes(data.id);
   };
 
   const handleDownvote = () => {

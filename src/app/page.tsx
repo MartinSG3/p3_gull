@@ -20,7 +20,7 @@ export default function Home() {
   const [data, setData] = useState<DataProps[]>([]);
   const [votesUsed, setVotesUsed] = useState(0);
   const [selectTag, setSelectTag] = useState("");
-  const [votes, setVotes] = useState([]);
+  const [votes, setVotes] = useState<DataProps[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,8 +35,6 @@ export default function Home() {
 
     fetchData();
   }, []);
-
-  console.log(votes);
 
   const handleUpvote = (itemId: number) => {
     if (votesUsed < 3) {
@@ -66,8 +64,11 @@ export default function Home() {
     }
   };
 
-  const showVotes = (item: any) => {
-    setVotes((prevVotes) => [...prevVotes, item]);
+  const showVotes = (itemId: number) => {
+    if (votesUsed < 3) {
+      const updatedVotes = data.filter((item) => item.id === itemId);
+      setVotes([...votes, ...updatedVotes]);
+    }
   };
 
   const tagSelect = (tag: string) => {
@@ -128,6 +129,16 @@ export default function Home() {
       </section>
       <section className={styles.tags}>
         <h3>Filtrer kategori</h3>
+        <div className={styles.flex}>
+          <div>
+            <h4>Du har stemt på: </h4>
+          </div>
+          <div className={styles.flexVotes}>
+            {votes.map((item) => (
+              <h5 key={item.id}>{item.artist}</h5>
+            ))}
+          </div>
+        </div>
         <div className={styles.flex}>
           <div className={selectTag === "Rap" ? styles.activeTag : styles.tag}>
             <button onClick={() => tagSelect("Rap")}>Rap</button>

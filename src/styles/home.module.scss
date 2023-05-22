@@ -274,6 +274,30 @@
       padding-bottom: 80px;
     }
 
+    h4 {
+      font-size: variables.$font_size_bread;
+      padding-right: 16px;
+    }
+
+    h5 {
+      font-size: variables.$font_size_bread;
+      padding-right: 16px;
+
+      @media (max-width: 1110px) {
+        padding-right: 0;
+        padding-top: 16px;
+      }
+    }
+
+    .flexVotes {
+      display: flex;
+      padding-bottom: 80px;
+
+      @media (max-width: 1110px) {
+        display: block;
+      }
+    }
+
     .flex {
       display: flex;
 
