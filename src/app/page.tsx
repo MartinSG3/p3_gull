@@ -18,9 +18,9 @@ interface DataProps {
 
 export default function Home() {
   const [data, setData] = useState<DataProps[]>([]);
-  const [items, setItems] = useState([]);
   const [votesUsed, setVotesUsed] = useState(0);
   const [selectTag, setSelectTag] = useState("");
+  const [votes, setVotes] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +35,8 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  console.log(votes);
 
   const handleUpvote = (itemId: number) => {
     if (votesUsed < 3) {
@@ -62,6 +64,10 @@ export default function Home() {
       setData(updatedItems);
       setVotesUsed(votesUsed > 0 ? votesUsed - 1 : 0);
     }
+  };
+
+  const showVotes = (item: any) => {
+    setVotes((prevVotes) => [...prevVotes, item]);
   };
 
   const tagSelect = (tag: string) => {
@@ -144,6 +150,7 @@ export default function Home() {
         <ArtistSection
           onUpvote={handleUpvote}
           onDownvote={handleDownvote}
+          votes={showVotes}
           key={data.id}
           data={data}
           votesUsed={votesUsed}

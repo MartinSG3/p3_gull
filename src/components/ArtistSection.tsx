@@ -4,7 +4,6 @@ import { FC } from "react";
 import styles from "../styles/home.module.scss";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-
 interface ArtistProps {
   data: {
     id: number;
